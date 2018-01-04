@@ -577,7 +577,7 @@ func setKubeletAPIQPSLimit(f *framework.Framework, newAPIQPS int32) {
 	resp := pollConfigz(2*time.Minute, 5*time.Second)
 	kubeCfg, err := decodeConfigz(resp)
 	framework.ExpectNoError(err)
-	framework.Logf("Old QPS limit is: %d\n", kubeCfg.KubeAPIQPS)
+	framework.Logf("Old QPS limit is: %d", kubeCfg.KubeAPIQPS)
 
 	// Set new API QPS limit
 	kubeCfg.KubeAPIQPS = newAPIQPS
@@ -593,7 +593,7 @@ func setKubeletAPIQPSLimit(f *framework.Framework, newAPIQPS int32) {
 	resp = pollConfigz(2*time.Minute, 5*time.Second)
 	kubeCfg, err = decodeConfigz(resp)
 	framework.ExpectNoError(err)
-	framework.Logf("New QPS limit is: %d\n", kubeCfg.KubeAPIQPS)
+	framework.Logf("New QPS limit is: %d", kubeCfg.KubeAPIQPS)
 
 	// TODO(coufon): check test result to see if we need to retry here
 	if kubeCfg.KubeAPIQPS != newAPIQPS {
