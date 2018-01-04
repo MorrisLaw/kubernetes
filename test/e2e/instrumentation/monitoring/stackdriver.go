@@ -110,7 +110,7 @@ func testStackdriverMonitoring(f *framework.Framework, pods, allPodsCPU int, per
 	pollingFunction := checkForMetrics(projectId, gcmService, time.Now(), metricsMap, allPodsCPU, perPodCPU)
 	err = wait.Poll(pollFrequency, pollTimeout, pollingFunction)
 	if err != nil {
-		framework.Logf("Missing metrics: %+v\n", metricsMap)
+		framework.Logf("Missing metrics: %+v", metricsMap)
 	}
 	framework.ExpectNoError(err)
 }
@@ -129,9 +129,9 @@ func checkForMetrics(projectId string, gcmService *gcm.Service, start time.Time,
 			if len(ts) > 0 {
 				counter = counter + 1
 				metricsMap[metric] = true
-				framework.Logf("Received %v timeseries for metric %v\n", len(ts), metric)
+				framework.Logf("Received %v timeseries for metric %v", len(ts), metric)
 			} else {
-				framework.Logf("No timeseries for metric %v\n", metric)
+				framework.Logf("No timeseries for metric %v", metric)
 			}
 
 			var sum float64 = 0
@@ -148,10 +148,10 @@ func checkForMetrics(projectId string, gcmService *gcm.Service, start time.Time,
 						}
 					}
 					sum = sum + *max.Value.DoubleValue
-					framework.Logf("Received %v points for metric %v\n",
+					framework.Logf("Received %v points for metric %v",
 						len(t.Points), metric)
 				}
-				framework.Logf("Most recent cpu/utilization sum*cpu/limit: %v\n", sum*float64(cpuLimit))
+				framework.Logf("Most recent cpu/utilization sum*cpu/limit: %v", sum*float64(cpuLimit))
 				if math.Abs(sum*float64(cpuLimit)-float64(cpuUsed)) > tolerance*float64(cpuUsed) {
 					return false, nil
 				} else {
