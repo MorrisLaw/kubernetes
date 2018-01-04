@@ -65,7 +65,7 @@ func OnlyAllowNodeZones(f *framework.Framework, zoneCount int, image string) {
 	// Get all the zones that the nodes are in
 	expectedZones, err := gceCloud.GetAllZonesFromCloudProvider()
 	Expect(err).NotTo(HaveOccurred())
-	framework.Logf("Expected zones: %v\n", expectedZones)
+	framework.Logf("Expected zones: %v", expectedZones)
 
 	// Get all the zones in this current region
 	region := gceCloud.Region()
@@ -123,7 +123,7 @@ func OnlyAllowNodeZones(f *framework.Framework, zoneCount int, image string) {
 		framework.Logf("Deleting compute resource: %v", name)
 		resp, err := gceCloud.DeleteInstance(project, zone, name)
 		Expect(err).NotTo(HaveOccurred())
-		framework.Logf("Compute deletion response: %v\n", resp)
+		framework.Logf("Compute deletion response: %v", resp)
 	}()
 
 	By("Creating zoneCount+1 PVCs and making sure PDs are only provisioned in zones with nodes")
