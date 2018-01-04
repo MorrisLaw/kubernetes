@@ -149,7 +149,7 @@ func (config *NetworkingTestConfig) diagnoseMissingEndpoints(foundEndpoints sets
 		if foundEndpoints.Has(e.Name) {
 			continue
 		}
-		Logf("\nOutput of kubectl describe pod %v/%v:\n", e.Namespace, e.Name)
+		Logf("\nOutput of kubectl describe pod %v/%v:", e.Namespace, e.Name)
 		desc, _ := RunKubectl(
 			"describe", "pod", e.Name, fmt.Sprintf("--namespace=%v", e.Namespace))
 		Logf(desc)
@@ -224,7 +224,7 @@ func (config *NetworkingTestConfig) DialFromContainer(protocol, containerIP, tar
 	}
 
 	config.diagnoseMissingEndpoints(eps)
-	Failf("Failed to find expected endpoints:\nTries %d\nCommand %v\nretrieved %v\nexpected %v\n", maxTries, cmd, eps, expectedEps)
+	Failf("Failed to find expected endpoints:\nTries %d\nCommand %v\nretrieved %v\nexpected %v", maxTries, cmd, eps, expectedEps)
 }
 
 func (config *NetworkingTestConfig) GetEndpointsFromTestContainer(protocol, targetIP string, targetPort, tries int) (sets.String, error) {
@@ -335,7 +335,7 @@ func (config *NetworkingTestConfig) DialFromNode(protocol, targetIP string, targ
 	}
 
 	config.diagnoseMissingEndpoints(eps)
-	Failf("Failed to find expected endpoints:\nTries %d\nCommand %v\nretrieved %v\nexpected %v\n", maxTries, cmd, eps, expectedEps)
+	Failf("Failed to find expected endpoints:\nTries %d\nCommand %v\nretrieved %v\nexpected %v", maxTries, cmd, eps, expectedEps)
 }
 
 // GetSelfURL executes a curl against the given path via kubectl exec into a
@@ -378,7 +378,7 @@ func (config *NetworkingTestConfig) executeCurlCmd(cmd string, expected string) 
 		}
 		return true, nil
 	}); pollErr != nil {
-		Logf("\nOutput of kubectl describe pod %v/%v:\n", config.Namespace, podName)
+		Logf("\nOutput of kubectl describe pod %v/%v:", config.Namespace, podName)
 		desc, _ := RunKubectl(
 			"describe", "pod", podName, fmt.Sprintf("--namespace=%v", config.Namespace))
 		Logf("%s", desc)
