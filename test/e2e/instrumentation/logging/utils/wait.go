@@ -182,7 +182,7 @@ func getFullIngestionTimeout(podsMap map[string]FiniteLoggingPod, slack float64)
 			totalWant += want
 		}
 		if len(lossMsgs) > 0 {
-			framework.Logf("Still missing logs from:\n%s", strings.Join(lossMsgs, "\n"))
+			framework.Logf("Still missing logs from:\n%s", lossMsgs)
 		}
 		lostFrac := 1 - float64(totalGot)/float64(totalWant)
 		if lostFrac > slack {
