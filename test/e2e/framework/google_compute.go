@@ -179,7 +179,7 @@ func lookupClusterImageSources() (string, string, error) {
 func LogClusterImageSources() {
 	masterImg, nodeImg, err := lookupClusterImageSources()
 	if err != nil {
-		Logf("Cluster image sources lookup failed: %v\n", err)
+		Logf("Cluster image sources lookup failed: %v", err)
 		return
 	}
 	Logf("cluster-master-image: %s", masterImg)
