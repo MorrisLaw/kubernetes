@@ -105,7 +105,7 @@ func failureTrap(c clientset.Interface, ns string) {
 	for i := range deployments.Items {
 		d := deployments.Items[i]
 
-		framework.Logf(spew.Sprintf("Deployment %q:\n%+v\n", d.Name, d))
+		framework.Logf(spew.Sprintf("Deployment %q:\n%+v", d.Name, d))
 		_, allOldRSs, newRS, err := deploymentutil.GetAllReplicaSets(&d, c.ExtensionsV1beta1())
 		if err != nil {
 			framework.Logf("Could not list ReplicaSets for Deployment %q: %v", d.Name, err)
@@ -129,7 +129,7 @@ func failureTrap(c clientset.Interface, ns string) {
 		return
 	}
 	for _, rs := range rss.Items {
-		framework.Logf(spew.Sprintf("ReplicaSet %q:\n%+v\n", rs.Name, rs))
+		framework.Logf(spew.Sprintf("ReplicaSet %q:\n%+v", rs.Name, rs))
 		selector, err := metav1.LabelSelectorAsSelector(rs.Spec.Selector)
 		if err != nil {
 			framework.Logf("failed to get selector of ReplicaSet %s: %v", rs.Name, err)
@@ -137,7 +137,7 @@ func failureTrap(c clientset.Interface, ns string) {
 		options := metav1.ListOptions{LabelSelector: selector.String()}
 		podList, err := c.CoreV1().Pods(rs.Namespace).List(options)
 		for _, pod := range podList.Items {
-			framework.Logf(spew.Sprintf("pod: %q:\n%+v\n", pod.Name, pod))
+			framework.Logf(spew.Sprintf("pod: %q:\n%+v", pod.Name, pod))
 		}
 	}
 }
@@ -354,14 +354,14 @@ func testDeploymentCleanUpPolicy(f *framework.Framework) {
 				}
 				numPodCreation--
 				if numPodCreation < 0 {
-					framework.Failf("Expect only one pod creation, the second creation event: %#v\n", event)
+					framework.Failf("Expect only one pod creation, the second creation event: %#v", event)
 				}
 				pod, ok := event.Object.(*v1.Pod)
 				if !ok {
 					framework.Failf("Expect event Object to be a pod")
 				}
 				if pod.Spec.Containers[0].Name != RedisImageName {
-					framework.Failf("Expect the created pod to have container name %s, got pod %#v\n", RedisImageName, pod)
+					framework.Failf("Expect the created pod to have container name %s, got pod %#v", RedisImageName, pod)
 				}
 			case <-stopCh:
 				return
