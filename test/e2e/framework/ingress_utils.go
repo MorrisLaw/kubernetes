@@ -355,7 +355,7 @@ func CleanupGCEIngressController(gceController *GCEIngressController) {
 	// throw out confusing events.
 	if ipErr := wait.Poll(5*time.Second, 1*time.Minute, func() (bool, error) {
 		if err := gceController.deleteStaticIPs(); err != nil {
-			Logf("Failed to delete static-ip: %v\n", err)
+			Logf("Failed to delete static-ip: %v", err)
 			return false, nil
 		}
 		return true, nil
