@@ -429,7 +429,7 @@ var _ = SIGDescribe("Density", func() {
 		framework.ExpectNoError(framework.ResetMetrics(c))
 		framework.ExpectNoError(os.Mkdir(fmt.Sprintf(framework.TestContext.OutputDir+"/%s", uuid), 0777))
 
-		framework.Logf("Listing nodes for easy debugging:\n")
+		framework.Logf("Listing nodes for easy debugging:")
 		for _, node := range nodes.Items {
 			var internalIP, externalIP string
 			for _, address := range node.Status.Addresses {
