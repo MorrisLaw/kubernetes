@@ -735,7 +735,7 @@ func DeleteAllStatefulSets(c clientset.Interface, ns string) {
 		if len(waitingFor) == 0 {
 			return true, nil
 		}
-		Logf("Still waiting for pvs of statefulset to disappear:\n%v", strings.Join(waitingFor, "\n"))
+		Logf("Still waiting for pvs of statefulset to disappear:\n%v", waitingFor)
 		return false, nil
 	})
 	if pollErr != nil {
