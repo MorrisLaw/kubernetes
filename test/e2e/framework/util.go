@@ -259,6 +259,7 @@ func nowStamp() string {
 }
 
 func log(level string, format string, args ...interface{}) {
+	strings.TrimSuffix(format, "\n")
 	fmt.Fprintf(GinkgoWriter, nowStamp()+": "+level+": "+format+"\n", args...)
 }
 
