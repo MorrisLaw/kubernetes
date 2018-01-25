@@ -198,7 +198,7 @@ func assertFilesContain(fileNames []string, fileDir string, pod *v1.Pod, client 
 		if len(failed) == 0 {
 			return true, nil
 		}
-		framework.Logf("Lookups using %s failed for: %v\n", pod.Name, failed)
+		framework.Logf("Lookups using %s failed for: %v", pod.Name, failed)
 		return false, nil
 	}))
 	Expect(len(failed)).To(Equal(0))
@@ -229,7 +229,7 @@ func validateDNSResults(f *framework.Framework, pod *v1.Pod, fileNames []string)
 
 	// TODO: probe from the host, too.
 
-	framework.Logf("DNS probes using %s succeeded\n", pod.Name)
+	framework.Logf("DNS probes using %s succeeded", pod.Name)
 }
 
 func validateTargetedProbeOutput(f *framework.Framework, pod *v1.Pod, fileNames []string, value string) {
@@ -255,7 +255,7 @@ func validateTargetedProbeOutput(f *framework.Framework, pod *v1.Pod, fileNames 
 	By("looking for the results for each expected name from probers")
 	assertFilesContain(fileNames, "results", pod, f.ClientSet, true, value)
 
-	framework.Logf("DNS probes using %s succeeded\n", pod.Name)
+	framework.Logf("DNS probes using %s succeeded", pod.Name)
 }
 
 func reverseArray(arr []string) []string {

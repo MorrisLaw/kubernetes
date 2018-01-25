@@ -1389,7 +1389,7 @@ func CleanupServiceGCEResources(c clientset.Interface, loadBalancerName, zone st
 }
 
 func DescribeSvc(ns string) {
-	Logf("\nOutput of kubectl describe svc:\n")
+	Logf("\nOutput of kubectl describe svc:")
 	desc, _ := RunKubectl(
 		"describe", "svc", fmt.Sprintf("--namespace=%v", ns))
 	Logf(desc)

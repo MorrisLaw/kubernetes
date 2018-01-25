@@ -442,7 +442,7 @@ func testMutatingConfigMapWebhook(f *framework.Framework) {
 		"mutation-stage-2": "yes",
 	}
 	if !reflect.DeepEqual(expectedConfigMapData, mutatedConfigMap.Data) {
-		framework.Failf("\nexpected %#v\n, got %#v\n", expectedConfigMapData, mutatedConfigMap.Data)
+		framework.Failf("\nexpected %#v\n, got %#v", expectedConfigMapData, mutatedConfigMap.Data)
 	}
 }
 
@@ -987,6 +987,6 @@ func testMutatingCRDWebhook(f *framework.Framework, crdClient dynamic.ResourceIn
 		"mutation-stage-2": "yes",
 	}
 	if !reflect.DeepEqual(expectedCRData, mutatedCR.Object["data"]) {
-		framework.Failf("\nexpected %#v\n, got %#v\n", expectedCRData, mutatedCR.Object["data"])
+		framework.Failf("\nexpected %#v\n, got %#v", expectedCRData, mutatedCR.Object["data"])
 	}
 }

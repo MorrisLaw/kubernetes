@@ -176,9 +176,9 @@ func printStatusAndLogsForNotReadyPods(c clientset.Interface, ns string, podName
 			prefix = "Retrieving log for the last terminated container"
 		}
 		if err != nil {
-			framework.Logf("%s %s, err: %v:\n%s\n", prefix, id, err, log)
+			framework.Logf("%s %s, err: %v:\n%s", prefix, id, err, log)
 		} else {
-			framework.Logf("%s %s:\n%s\n", prefix, id, log)
+			framework.Logf("%s %s:\n%s", prefix, id, log)
 		}
 	}
 	podNameSet := sets.NewString(podNames...)

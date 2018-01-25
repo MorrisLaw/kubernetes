@@ -152,7 +152,7 @@ func verifyMemoryLimits(c clientset.Interface, expected framework.ResourceUsageP
 		}
 	}
 	if len(errList) > 0 {
-		framework.Failf("Memory usage exceeding limits:\n %s", strings.Join(errList, "\n"))
+		framework.Failf("Memory usage exceeding limits:\n %s", errList)
 	}
 }
 
@@ -186,7 +186,7 @@ func verifyCPULimits(expected framework.ContainersCPUSummary, actual framework.N
 		}
 	}
 	if len(errList) > 0 {
-		framework.Failf("CPU usage exceeding limits:\n %s", strings.Join(errList, "\n"))
+		framework.Failf("CPU usage exceeding limits:\n %s", errList)
 	}
 }
 

@@ -1868,7 +1868,7 @@ func execSourceipTest(f *framework.Framework, c clientset.Interface, ns, nodeNam
 	outputs := strings.Split(strings.TrimSpace(stdout), "=")
 	if len(outputs) != 2 {
 		// Fail the test if output format is unexpected.
-		framework.Failf("exec pod returned unexpected stdout format: [%v]\n", stdout)
+		framework.Failf("exec pod returned unexpected stdout format: [%v]", stdout)
 	}
 	return execPod.Status.PodIP, outputs[1]
 }

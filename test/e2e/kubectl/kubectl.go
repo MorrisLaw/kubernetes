@@ -1875,7 +1875,7 @@ func modifyReplicationControllerConfiguration(contents string) io.Reader {
 	rc.Spec.Template.Labels[applyTestLabel] = "ADDED"
 	data, err := json.Marshal(rc)
 	if err != nil {
-		framework.Failf("json marshal failed: %s\n", err)
+		framework.Failf("json marshal failed: %s", err)
 	}
 
 	return bytes.NewReader(data)
@@ -1906,11 +1906,11 @@ func forEachReplicationController(c clientset.Interface, ns, selectorKey, select
 func validateReplicationControllerConfiguration(rc v1.ReplicationController) {
 	if rc.Name == "redis-master" {
 		if _, ok := rc.Annotations[v1.LastAppliedConfigAnnotation]; !ok {
-			framework.Failf("Annotation not found in modified configuration:\n%v\n", rc)
+			framework.Failf("Annotation not found in modified configuration:\n%v", rc)
 		}
 
 		if value, ok := rc.Labels[applyTestLabel]; !ok || value != "ADDED" {
-			framework.Failf("Added label %s not found in modified configuration:\n%v\n", applyTestLabel, rc)
+			framework.Failf("Added label %s not found in modified configuration:\n%v", applyTestLabel, rc)
 		}
 	}
 }

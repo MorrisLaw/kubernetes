@@ -4967,7 +4967,7 @@ func PollURL(route, host string, timeout time.Duration, interval time.Duration, 
 }
 
 func DescribeIng(ns string) {
-	Logf("\nOutput of kubectl describe ing:\n")
+	Logf("\nOutput of kubectl describe ing:")
 	desc, _ := RunKubectl(
 		"describe", "ing", fmt.Sprintf("--namespace=%v", ns))
 	Logf(desc)
