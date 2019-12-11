@@ -159,7 +159,7 @@ func NewKubeGenericRuntimeManager(
 	podStateProvider podStateProvider,
 	osInterface kubecontainer.OSInterface,
 	runtimeHelper kubecontainer.RuntimeHelper,
-	httpClient types.HttpDoer,
+	httpClient types.HTTPDoer,
 	imageBackOff *flowcontrol.Backoff,
 	serializeImagePulls bool,
 	imagePullQPS float32,

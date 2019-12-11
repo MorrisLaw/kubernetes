@@ -39,7 +39,7 @@ const (
 )
 
 type HandlerRunner struct {
-	httpDoer         kubetypes.HttpDoer
+	httpDoer         kubetypes.HTTPDoer
 	commandRunner    kubecontainer.ContainerCommandRunner
 	containerManager podStatusProvider
 }
@@ -48,7 +48,7 @@ type podStatusProvider interface {
 	GetPodStatus(uid types.UID, name, namespace string) (*kubecontainer.PodStatus, error)
 }
 
-func NewHandlerRunner(httpDoer kubetypes.HttpDoer, commandRunner kubecontainer.ContainerCommandRunner, containerManager podStatusProvider) kubecontainer.HandlerRunner {
+func NewHandlerRunner(httpDoer kubetypes.HTTPDoer, commandRunner kubecontainer.ContainerCommandRunner, containerManager podStatusProvider) kubecontainer.HandlerRunner {
 	return &HandlerRunner{
 		httpDoer:         httpDoer,
 		commandRunner:    commandRunner,
@@ -153,7 +153,11 @@ func (hr *HandlerRunner) runHTTPHandler(pod *v1.Pod, container *v1.Container, ha
 		}
 	}
 	path := handler.HTTPGet.Path
-	url := formatURL("http", host, port, path)
+	scheme := "http"
+	if string(handler.HTTPGet.Scheme) != "" {
+		scheme = string(handler.HTTPGet.Scheme)
+	}
+	url := formatURL(scheme, host, port, path)
 
 	req, err := http.NewRequest(http.MethodGet, url.String(), nil)
 	if err != nil {
